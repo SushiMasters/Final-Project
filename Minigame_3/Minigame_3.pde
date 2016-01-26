@@ -1,6 +1,5 @@
 PImage restaurant, cannon;
 float mode, theta, timer;
-PVector cannonTip;
 ArrayList<Sushi> sushi = new ArrayList <Sushi>();
 Person emily, ethan, elsa, shiv;
 
@@ -15,7 +14,7 @@ void setup() {
   cannon.resize(250, 97); 
   restaurant.resize(1280, 720);
 
-  cannonTip = new PVector(80, 450);
+  //cannonTip = new PVector(80, 450);
   //shivpos = new PVector(random(640, 1280), 550);
   //ethanpos = new PVector(random(640, 1280), 550);
   //emilypos = new PVector(random(640, 1280), 550);
@@ -70,7 +69,7 @@ void mousePressed() {
 
   if (mode == 1) {
     if (frameCount > timer + 3) {
-      sushi.add(new Sushi(cannonTip.x+100*cos(theta), cannonTip.y+100*sin(theta)));
+      sushi.add(new Sushi(262*cos(theta)-50, 460+262*sin(theta)));
     }
   }
 }
