@@ -16,10 +16,10 @@ void setup() {
   restaurant.resize(1280, 720);
 
   cannonTip = new PVector(80, 450);
-  shivpos = new PVector(random(640, 1280), 550);
-  ethanpos = new PVector(random(640, 1280), 550);
-  emilypos = new PVector(random(640, 1280), 550);
-  elsapos = new PVector(random(640, 1280), 550);
+  //shivpos = new PVector(random(640, 1280), 550);
+  //ethanpos = new PVector(random(640, 1280), 550);
+  //emilypos = new PVector(random(640, 1280), 550);
+  //elsapos = new PVector(random(640, 1280), 550);
 }
 
 void draw() {
@@ -42,10 +42,10 @@ void draw() {
   } else if (mode ==1) {
     
     image(restaurant, 0, 0);
-    image(shiv, shivpos.x, shivpos.y);
-    image(emily, emilypos.x, emilypos.y);
-    image(ethan, ethanpos.x, ethanpos.y);
-    image(elsa, elsapos.x, elsapos.y);
+    //image(shiv, shivpos.x, shivpos.y);
+    //image(emily, emilypos.x, emilypos.y);
+    //image(ethan, ethanpos.x, ethanpos.y);
+    //image(elsa, elsapos.x, elsapos.y);
       
     for (int i = 0; i < sushi.size(); i++) {
       Sushi s = sushi.get(i);
