@@ -1,6 +1,6 @@
 class Person {
   PImage shiv, ethan, emily, elsa;
-  PVector pos, vel;
+  PVector pos, pace;
 
   Person(float x, float y) {
     shiv = loadImage("shiv.png");
@@ -9,14 +9,14 @@ class Person {
     elsa = loadImage("elsa.png");
 
     pos = new PVector(random(640, 1280), 50);
-    pos.add(vel);
+    pos.add(pace);
   }
 
   void move() {
     if (pos.x >= 1280) {
-      vel = new PVector(random(-4, -2), 0);
+      pace = new PVector(random(-4, -2), 0);
     } else if (pos.x <= 640) {
-      vel = new PVector(random(2, 4), 0);
+      pace = new PVector(random(2, 4), 0);
     }
   }
 }

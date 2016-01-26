@@ -17,7 +17,7 @@ class Sushi {
     loc.add(vel);
     vel.add(gravity);
   }
-  
-  void touches(PVector mouth){
+
+  void touches(PVector mouth) {
   }
 }

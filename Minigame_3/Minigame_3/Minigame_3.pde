@@ -1,5 +1,5 @@
 PImage restaurant, cannon;
-float mode, theta, timer;
+float mode, theta, pace;
 PVector cannonTip;
 ArrayList<Sushi> sushi = new ArrayList <Sushi>();
 Person emily, ethan, elsa, shiv;
@@ -40,13 +40,13 @@ void draw() {
     String des = "Fill up the bellies of the hungry tech students with your powerful sushi cannon!";
     text(des, 250, height/2, 800, height);
   } else if (mode ==1) {
-
+    
     image(restaurant, 0, 0);
     //image(shiv, shivpos.x, shivpos.y);
     //image(emily, emilypos.x, emilypos.y);
     //image(ethan, ethanpos.x, ethanpos.y);
     //image(elsa, elsapos.x, elsapos.y);
-
+      
     for (int i = 0; i < sushi.size(); i++) {
       Sushi s = sushi.get(i);
       s.shoot();
@@ -65,12 +65,9 @@ void draw() {
 void mousePressed() {
   if (mode == 0) {
     mode = 1;
-    timer = frameCount;
   }
 
   if (mode == 1) {
-    if (frameCount > timer + 3) {
-      sushi.add(new Sushi(cannonTip.x+100*cos(theta), cannonTip.y+100*sin(theta)));
-    }
+    sushi.add(new Sushi(cannonTip.x+100*cos(theta), cannonTip.y+100*sin(theta)));
   }
 }
