@@ -1,4 +1,4 @@
-//Minigame 2: Manufacture //<>// //<>//
+//Minigame 2: Manufacture  //<>//
 int gMode, timer, number;
 Title screen;
 Ingredients mat, rice, nori, sauce, wasabi, fish, avocado;
@@ -30,6 +30,7 @@ void setup() {
 }
 
 void draw() {
+  println("Mat: " + ma + "  Rice: " + ri + "  Nori: " + no + "  Sauce: " + "  Wasabi: " + wa + "  Fish: " + fi + "  Avo: " + av); 
   //Game: Setup
 
   //Title Screen
@@ -57,7 +58,7 @@ void draw() {
     textAlign(CENTER);
     fill(0);
     String num = "ORDER #" + number + ": ";
-    String order = "1 Rice "+"1 Nori "+"1 Sauce "+w+" Wasabi "+f+" Fish "+a+" Avocado";
+    String order = "1 Nori "+"1 Rice "+f+" Fish "+a+" Avocado "+"1 Sauce "+w+" Wasabi";
     text(num + order, width/2, 23);
 
     stroke(0);
@@ -68,29 +69,87 @@ void draw() {
 
 
     if (ma == true) {
-      nori.nPlace();
+      if (ri == true) {
+        rice.rPlace();
+      }
+      if (no == true) {
+        nori.nPlace();
+      }
+      if (sa == true) {
+        sauce.sPlace();
+      }
+      if (wa == true) {
+        wasabi.wPlace();
+      }
+      if (fi == true) {
+        fish.fPlace();
+      }
+      if (av == true) {
+        avocado.aPlace();
+      }
+    }
+    if (ri == true) {
+      textSize(20);
+      fill(255, 0, 0);
+      text("RICE", 180, 180);
     }
     if (no == true) {
       textSize(20);
       fill(255, 0, 0);
       text("NORI", 180, 365);
     }
+    if (sa == true) {
+      textSize(20);
+      fill(255, 0, 0);
+      text("SAUCE", 180, 600);
+    }
+    if (wa == true) {
+      textSize(20);
+      fill(255, 0, 0);
+      text("WASABI", width-180, 170);
+    }
+    if (fi == true) {
+      textSize(20);
+      fill(255, 0, 0);
+      text("FISH", width-180, 365);
+    }
+    if (av == true) {
+      textSize(20);
+      fill(255, 0, 0);
+      text("AVOCADO", width-180, 620);
+    }
   }
 }
 
 void mouseClicked() {
-  if (gMode == 0) {
-    gMode = 1;
+
+  if (mouseButton == LEFT && dist(mouseX, mouseY, width/2, 670)<=40) {
     newOrder();
   }
-  if (number>1 && mouseButton == LEFT && dist(mouseX, mouseY, width/2, 670)<=40) {
-    newOrder();
+  if (gMode ==1 && dist(mouseX, mouseY, width/2, height/2) <= 500) {
+    ma = true;
+  }
+  if (gMode == 1 && dist(mouseX, mouseY, 180, 180) <= 75) {
+    ri = true;
   }
   if (gMode == 1 && dist(mouseX, mouseY, 180, 365) <= 75) {
     no = true;
   }
-  if (gMode ==1 && no==true && dist(mouseX, mouseY, width/2, height/2) <= 200) {
-    ma = true;
+  if (gMode == 1 && dist(mouseX, mouseY, 180, 600) <= 75) {
+    sa = true;
+  }
+  if (gMode == 1 && dist(mouseX, mouseY, width-180, 170) <= 75) {
+    wa = true;
+  }
+  if (gMode == 1 && dist(mouseX, mouseY, width-180, 365) <= 75) {
+    fi = true;
+  }
+  if (gMode == 1 && dist(mouseX, mouseY, width-180, 620) <= 75) {
+    av = true;
+  }
+  if (gMode == 0) {
+    gMode = 1;
+    newOrder();
   }
 }
 

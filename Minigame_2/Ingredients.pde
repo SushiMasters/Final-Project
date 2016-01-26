@@ -1,5 +1,4 @@
 class Ingredients {
-  int m, r, n, s, w, f, a;
   PImage mat, rice, nori, sauce, wasabi, fish, avocado;
 
   Ingredients() {
@@ -41,7 +40,6 @@ class Ingredients {
       fill(8, 36, 5);
       stroke(8, 36, 5);
       rect(width/2, height/2-50, 650, 500);
-      no = false;
     }
   }
   void rPlace() {
@@ -49,6 +47,34 @@ class Ingredients {
       fill(255);
       stroke(255);
       rect(width/2, height/2-50, 550, 400);
+    }
+  }
+  void fPlace() {
+    if (fi = true) {
+      fill(255, 197, 184);
+      stroke(255, 197, 184);
+      rect(width/2, height/2-50, 500, 300);
+    }
+  }
+  void aPlace() {
+    if (av = true) {
+      fill(130, 168, 130);
+      stroke(130, 168, 130);
+      ellipse(width/2, height/2-50, 300, 275);
+    }
+  }
+  void sPlace() {
+    if (sa = true) {
+      fill(59, 27, 6);
+      stroke(59, 27, 6);
+      ellipse(width/2, height/2-50, 250, 225);
+    }
+  }
+  void wPlace() {
+    if (wa = true) {
+      fill(206, 255, 184);
+      stroke(206, 255, 184);
+      ellipse(width/2, height/2-50, 225, 200);
     }
   }
 }
