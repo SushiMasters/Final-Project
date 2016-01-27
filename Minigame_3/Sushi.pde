@@ -18,6 +18,15 @@ class Sushi {
     vel.add(gravity);
   }
 
-  void touches(PVector mouth) {
+  boolean touches(PVector mouth) {
+    if (loc.dist(mouth) <=10) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  void getsEaten() {
+    loc = null;
   }
 }
