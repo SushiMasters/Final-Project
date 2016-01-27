@@ -1,39 +1,28 @@
 class Ingredients {
-  PImage mat, rice, nori, sauce, wasabi, fish, avocado;
+  PImage mat, nori, rice, fish, avocado, sauce, wasabi;
 
   Ingredients() {
-    //Initialize
-    mat = loadImage("mat.png");
-    rice = loadImage("rice.png");
-    nori = loadImage("nori.png");
-    sauce = loadImage("sauce.png");
-    wasabi = loadImage("wasabi.png");
-    fish = loadImage("fish.png");
-    avocado = loadImage("avocado.png");
   }
-
-  void display() { 
-    //Images
+}
+class Mat extends Ingredients {
+  Mat() {
+    mat = loadImage("mat.png");
+  }
+  void display() {
     image(mat, 0, 0);
-    image(rice, 80, 30);
-    image(nori, 80, 30+200+30);
-    image(sauce, 80, height-30-200);
-    image(wasabi, width-200-80, 40);
-    image(fish, width-200-80, 50+165+40);
-    image(avocado, width-200-80, height-165-40);
+  }
+}
 
-    //Labels
+class Nori extends Ingredients {
+  Nori() {
+    nori = loadImage("nori.png");
+  }
+  void display() {
+    image(nori, 80, 30+200+30);
     textSize(20);
     fill(255);
-    text("RICE", 180, 180);
     text("NORI", 180, 365);
-    text("SAUCE", 180, 600);
-    fill(0);
-    text("WASABI", width-180, 170);
-    text("FISH", width-180, 365);
-    text("AVOCADO", width-180, 620);
   }
-
   void nPlace() {
     rectMode(CENTER);
     if (no = true) {
@@ -42,12 +31,36 @@ class Ingredients {
       rect(width/2, height/2-50, 650, 500);
     }
   }
+}
+
+class Rice extends Ingredients {
+  Rice() {
+    rice = loadImage("rice.png");
+  }
+  void display() {
+    image(rice, 80, 30);
+    textSize(20);
+    fill(255);
+    text("RICE", 180, 180);
+  }
   void rPlace() {
     if (ri = true) {
       fill(255);
       stroke(255);
       rect(width/2, height/2-50, 550, 400);
     }
+  }
+}
+
+class Fish extends Ingredients {
+  Fish() {
+    fish = loadImage("fish.png");
+  }
+  void display() {
+    image(fish, width-200-80, 50+165+40);
+    textSize(20);
+    fill(0);
+    text("FISH", width-180, 365);
   }
   void fPlace() {
     if (fi = true) {
@@ -56,6 +69,18 @@ class Ingredients {
       rect(width/2, height/2-50, 500, 300);
     }
   }
+}
+
+class Avocado extends Ingredients {
+  Avocado() {
+    avocado = loadImage("avocado.png");
+  }
+  void display() { 
+    image(avocado, width-200-80, height-165-40);
+    textSize(20);
+    fill(0);
+    text("AVOCADO", width-180, 620);
+  }
   void aPlace() {
     if (av = true) {
       fill(130, 168, 130);
@@ -63,12 +88,36 @@ class Ingredients {
       ellipse(width/2, height/2-50, 300, 275);
     }
   }
+}
+
+class Sauce extends Ingredients {
+  Sauce() {
+    sauce = loadImage("sauce.png");
+  }
+  void display() {
+    image(sauce, 80, height-30-200);
+    textSize(20);
+    fill(255);
+    text("SAUCE", 180, 600);
+  }
   void sPlace() {
     if (sa = true) {
       fill(59, 27, 6);
       stroke(59, 27, 6);
       ellipse(width/2, height/2-50, 250, 225);
     }
+  }
+}
+
+class Wasabi extends Ingredients {
+  Wasabi() {
+    wasabi = loadImage("wasabi.png");
+  }
+  void display() {
+    image(wasabi, width-200-80, 40);
+    textSize(20);
+    fill(0);
+    text("WASABI", width-180, 170);
   }
   void wPlace() {
     if (wa = true) {

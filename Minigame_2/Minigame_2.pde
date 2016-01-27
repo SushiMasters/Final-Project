@@ -1,36 +1,40 @@
 //Minigame 2: Manufacture  //<>//
 int gMode, timer, number;
 Title screen;
-Ingredients mat, rice, nori, sauce, wasabi, fish, avocado;
-boolean ma, ri, no, sa, wa, fi, av;
+Mat mat;
+Nori nori;
+Rice rice;
+Fish fish;
+Avocado avocado;
+Sauce sauce;
+Wasabi wasabi;
+boolean ma, no, ri, fi, av, sa, wa;
 int w, f, a;
 
 void setup() {
   size(1280, 720);
-
+  number = 0;
   gMode=0;
   timer = second();
-  number = 1;
 
-  mat = new Ingredients();
-  rice = new Ingredients();
-  nori = new Ingredients();
-  sauce = new Ingredients();
-  wasabi = new Ingredients();
-  fish = new Ingredients();
-  avocado = new Ingredients();
+  mat = new Mat();
+  nori = new Nori();
+  rice = new Rice();
+  fish = new Fish();
+  avocado = new Avocado();
+  sauce = new Sauce();
+  wasabi = new Wasabi();
 
   ma = false;
-  ri = false;
   no = false;
-  sa = false;
-  wa = false;
+  ri = false;
   fi = false;
   av = false;
+  sa = false;
+  wa = false;
 }
 
 void draw() {
-  println("Mat: " + ma + "  Rice: " + ri + "  Nori: " + no + "  Sauce: " + "  Wasabi: " + wa + "  Fish: " + fi + "  Avo: " + av); 
   //Game: Setup
 
   //Title Screen
@@ -42,16 +46,15 @@ void draw() {
   //Setup screen
   if (gMode == 1) {
     timer = second();
-    int number = 1; 
 
     //Display images & labels
     mat.display();
-    rice.display();
     nori.display();
-    sauce.display();
-    wasabi.display();
+    rice.display();
     fish.display();
     avocado.display();
+    sauce.display();
+    wasabi.display();
 
     //Game: order
     textSize(20);
@@ -69,17 +72,11 @@ void draw() {
 
 
     if (ma == true) {
-      if (ri == true) {
-        rice.rPlace();
-      }
       if (no == true) {
         nori.nPlace();
       }
-      if (sa == true) {
-        sauce.sPlace();
-      }
-      if (wa == true) {
-        wasabi.wPlace();
+      if (ri == true) {
+        rice.rPlace();
       }
       if (fi == true) {
         fish.fPlace();
@@ -87,26 +84,23 @@ void draw() {
       if (av == true) {
         avocado.aPlace();
       }
+      if (sa == true) {
+        sauce.sPlace();
+      }
+      if (wa == true) {
+        wasabi.wPlace();
+      }
     }
-    if (ri == true) {
-      textSize(20);
-      fill(255, 0, 0);
-      text("RICE", 180, 180);
-    }
+
     if (no == true) {
       textSize(20);
       fill(255, 0, 0);
       text("NORI", 180, 365);
     }
-    if (sa == true) {
+    if (ri == true) {
       textSize(20);
       fill(255, 0, 0);
-      text("SAUCE", 180, 600);
-    }
-    if (wa == true) {
-      textSize(20);
-      fill(255, 0, 0);
-      text("WASABI", width-180, 170);
+      text("RICE", 180, 180);
     }
     if (fi == true) {
       textSize(20);
@@ -118,28 +112,31 @@ void draw() {
       fill(255, 0, 0);
       text("AVOCADO", width-180, 620);
     }
+    if (sa == true) {
+      textSize(20);
+      fill(255, 0, 0);
+      text("SAUCE", 180, 600);
+    }
+    if (wa == true) {
+      textSize(20);
+      fill(255, 0, 0);
+      text("WASABI", width-180, 170);
+    }
   }
 }
 
 void mouseClicked() {
-
   if (mouseButton == LEFT && dist(mouseX, mouseY, width/2, 670)<=40) {
     newOrder();
   }
   if (gMode ==1 && dist(mouseX, mouseY, width/2, height/2) <= 500) {
     ma = true;
   }
-  if (gMode == 1 && dist(mouseX, mouseY, 180, 180) <= 75) {
-    ri = true;
-  }
   if (gMode == 1 && dist(mouseX, mouseY, 180, 365) <= 75) {
     no = true;
   }
-  if (gMode == 1 && dist(mouseX, mouseY, 180, 600) <= 75) {
-    sa = true;
-  }
-  if (gMode == 1 && dist(mouseX, mouseY, width-180, 170) <= 75) {
-    wa = true;
+  if (gMode == 1 && dist(mouseX, mouseY, 180, 180) <= 75) {
+    ri = true;
   }
   if (gMode == 1 && dist(mouseX, mouseY, width-180, 365) <= 75) {
     fi = true;
@@ -147,6 +144,13 @@ void mouseClicked() {
   if (gMode == 1 && dist(mouseX, mouseY, width-180, 620) <= 75) {
     av = true;
   }
+  if (gMode == 1 && dist(mouseX, mouseY, 180, 600) <= 75) {
+    sa = true;
+  }
+  if (gMode == 1 && dist(mouseX, mouseY, width-180, 170) <= 75) {
+    wa = true;
+  }
+
   if (gMode == 0) {
     gMode = 1;
     newOrder();
@@ -154,7 +158,17 @@ void mouseClicked() {
 }
 
 void newOrder() {
-  w = int(random(3));
-  f = int(random(2));
-  a = int(random(3));
+  w = int(random(1));
+  f = int(random(1));
+  a = int(random(1));
+
+  ma = false;
+  no = false;
+  ri = false;
+  fi = false;
+  av = false;
+  sa = false;
+  wa = false;
+
+  number +=1;
 }
