@@ -5,7 +5,6 @@ Person emily, ethan, elsa, shiv;
 
 void setup() {
   size(1280, 720, P3D);
-
   restaurant = loadImage("restaurant.jpg");
   cannon = loadImage("cannon.png");
 
@@ -14,11 +13,10 @@ void setup() {
   cannon.resize(250, 97); 
   restaurant.resize(1280, 720);
 
-  //cannonTip = new PVector(80, 450);
-  //shivpos = new PVector(random(640, 1280), 550);
-  //ethanpos = new PVector(random(640, 1280), 550);
-  //emilypos = new PVector(random(640, 1280), 550);
-  //elsapos = new PVector(random(640, 1280), 550);
+  shiv = new Person(random(640, 1280), 550, 0);
+  ethan = new Person(random(640, 1280), 550, 1);
+  emily = new Person(random(640, 1280), 550, 2);
+  elsa = new Person(random(640, 1280), 550, 3);
 }
 
 void draw() {
@@ -31,25 +29,30 @@ void draw() {
     textSize(75);
     text("DISSEMINATION", width/2, height/2-125);
     fill(150);
-    textSize(50);
+    textSize(50);     
     text("click to continue...", width/2, height/2+200);
     textAlign(LEFT);
     fill(255);
     textSize(20);
-    String des = "Fill up the bellies of the hungry tech students with your powerful sushi cannon!";
+    String des = "Fill up the bellies of the hungry tech students with your powerful sushi cannon! Stuff them with 10 rolls to finish the sushi saga! Good luck, young sushi student.";
     text(des, 250, height/2, 800, height);
   } else if (mode ==1) {
 
     image(restaurant, 0, 0);
-    //image(shiv, shivpos.x, shivpos.y);
-    //image(emily, emilypos.x, emilypos.y);
-    //image(ethan, ethanpos.x, ethanpos.y);
-    //image(elsa, elsapos.x, elsapos.y);
 
     for (int i = 0; i < sushi.size(); i++) {
       Sushi s = sushi.get(i);
       s.shoot();
     }
+    
+    elsa.display();
+    elsa.move();
+    ethan.display();
+    ethan.move();
+    emily.display();
+    emily.move();
+    shiv.display();
+    shiv.move();
 
     theta = 0.3-atan2(600-mouseY, mouseX);
 
