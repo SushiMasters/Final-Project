@@ -1,6 +1,7 @@
 //Minigame 2: Manufacture  //<>//
 int gMode, timer, number;
-Screen title, complete;
+float count;
+Screen title, complete, fail;
 Mat mat;
 Nori nori;
 Rice rice;
@@ -13,9 +14,11 @@ int w, f, a;
 
 void setup() {
   size(1280, 720);
+  frameRate(30);
   number = 0;
   gMode=0;
-  timer = second();
+  timer = 120;
+  count = 0;
 
   mat = new Mat();
   nori = new Nori();
@@ -45,7 +48,12 @@ void draw() {
 
   //Setup screen
   if (gMode == 1) {
-    timer = second();
+    count +=1;
+    if (count == 30) {
+      timer -=1;
+      count = 0;
+    }
+
 
     //Display images & labels
     mat.display();
@@ -55,6 +63,11 @@ void draw() {
     avocado.display();
     sauce.display();
     wasabi.display();
+
+    textSize(20);
+    fill(0);
+    String t = "TIME REMAINING: "+ timer;
+    text(t, width/2, 712);
 
     //Game: order
     textSize(20);
@@ -124,10 +137,18 @@ void draw() {
     if (number > 20) {
       gMode = 3;
     }
+    if (number <= 20 && timer<=0) {
+      gMode = 4;
+    }
   }
+
   if (gMode == 3) {
     complete = new Screen();
     complete.Complete();
+  }
+  if (gMode == 4) {
+    fail = new Screen();
+    fail.Fail();
   }
 }
 
