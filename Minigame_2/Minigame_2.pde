@@ -1,6 +1,6 @@
 //Minigame 2: Manufacture  //<>//
 int gMode, timer, number;
-Title screen;
+Screen title, complete;
 Mat mat;
 Nori nori;
 Rice rice;
@@ -39,8 +39,8 @@ void draw() {
 
   //Title Screen
   if (gMode == 0) {
-    screen = new Title();
-    screen.display();
+    title = new Screen();
+    title.Title();
   }
 
   //Setup screen
@@ -69,7 +69,6 @@ void draw() {
     fill(255);
     text("SEND TO WAITER", width/2, 675);
     rectMode(CENTER); 
-
 
     if (ma == true) {
       if (no == true) {
@@ -122,6 +121,13 @@ void draw() {
       fill(255, 0, 0);
       text("WASABI", width-180, 170);
     }
+    if (number > 20) {
+      gMode = 3;
+    }
+  }
+  if (gMode == 3) {
+    complete = new Screen();
+    complete.Complete();
   }
 }
 
