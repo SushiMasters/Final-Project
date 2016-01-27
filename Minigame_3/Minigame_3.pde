@@ -1,22 +1,26 @@
 PImage restaurant, cannon;
-float mode, theta, timer;
+float mode, theta, timer, x, y;
 ArrayList<Sushi> sushi = new ArrayList <Sushi>();
 Person emily, ethan, elsa, shiv;
+PVector mouth;
+int countDown;
 
 void setup() {
   size(1280, 720, P3D);
   restaurant = loadImage("restaurant.jpg");
   cannon = loadImage("cannon.png");
+  mouth = new PVector();
 
   mode = 0;
+  countDown = 10;
 
   cannon.resize(250, 97); 
   restaurant.resize(1280, 720);
 
-  shiv = new Person(random(640, 1280), 550, 0);
-  ethan = new Person(random(640, 1280), 550, 1);
-  emily = new Person(random(640, 1280), 550, 2);
-  elsa = new Person(random(640, 1280), 550, 3);
+  shiv = new Person(x, y, 0);
+  ethan = new Person(x, y, 1);
+  emily = new Person(x, y, 2);
+  elsa = new Person(x, y, 3);
 }
 
 void draw() {
@@ -39,6 +43,13 @@ void draw() {
   } else if (mode ==1) {
 
     image(restaurant, 0, 0);
+    textAlign(CENTER, TOP);
+    textSize(50);
+    fill(300, 300, 300);
+    text(countDown + "more rolls until you finish your training!", width/2, height/2);
+
+    //mouth.set(x+181, y+419);
+    mouth.set(x+97, y+200);
 
     elsa.display();
     elsa.move();
@@ -52,6 +63,10 @@ void draw() {
     for (int i = 0; i < sushi.size(); i++) {
       Sushi s = sushi.get(i);
       s.shoot();
+      if (s.touches(mouth)) {
+        s.getsEaten();
+        countDown -=1;
+      }
     }
 
     theta = 0.3-atan2(600-mouseY, mouseX);

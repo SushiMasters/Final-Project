@@ -1,6 +1,6 @@
 class Person {
   PImage img;
-  PVector pos, pace, mouth;
+  PVector pos, pace;
 
   Person(float  x, float y, int which) {
     if (which == 0) {
@@ -17,7 +17,6 @@ class Person {
     }
 
     pos = new PVector(random(540, 1280), random(375,425));
-    mouth = new PVector(181, 419);//needs to be resized proportionally
     pace = new PVector(random(-4,4),0);
   }
 
