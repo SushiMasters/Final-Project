@@ -18,18 +18,20 @@ class Person {
 
     pos = new PVector(random(640, 1280), 550);
     mouth = new PVector(181, 419);
+    pace = new PVector(random(-4,4),0);
   }
 
   void display() {
-      image(img, pos.x, pos.y);
+    image(img, pos.x, pos.y);
   }
-  
+
   void move() {
-    pos.add(pace);
     if (pos.x >= 1280) {
-      pace = new PVector(random(-4, -2), 0);
+      pace.set(random(-4, -2), 0);
     } else if (pos.x <= 640) {
-      pace = new PVector(random(2, 4), 0);
-    }
+      pace.set(random(2, 4), 0);
+    } 
+    
+    pos.add(pace);
   }
 }
