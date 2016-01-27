@@ -16,20 +16,20 @@ class Person {
       img = loadImage("elsa.png");
     }
 
-    pos = new PVector(random(640, 1280), random(400,450));
+    pos = new PVector(random(540, 1280), random(375,425));
     mouth = new PVector(181, 419);//needs to be resized proportionally
     pace = new PVector(random(-4,4),0);
   }
 
   void display() {
     image(img, pos.x, pos.y);
-    img.resize(165,250);
+    img.resize(198,300);
   }
 
   void move() {
-    if (pos.x >= 1200) {
+    if (pos.x >= 1150) {
       pace.set(random(-4, -2), 0);
-    } else if (pos.x <= 640) {
+    } else if (pos.x <= 540) {
       pace.set(random(2, 4), 0);
     } 
     

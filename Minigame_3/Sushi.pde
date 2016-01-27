@@ -4,11 +4,11 @@ class Sushi {
 
   Sushi(float x, float y) {
     loc = new PVector(x, y);
-    vel = new PVector(10, -5);
+    vel = new PVector(25, -9);
     gravity = new PVector(0, 1);
 
     sushi = loadImage("single sushi.png");
-    sushi.resize(40, 40);
+    sushi.resize(35, 35);
   }
 
   void shoot() {

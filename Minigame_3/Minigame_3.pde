@@ -40,11 +40,6 @@ void draw() {
 
     image(restaurant, 0, 0);
 
-    for (int i = 0; i < sushi.size(); i++) {
-      Sushi s = sushi.get(i);
-      s.shoot();
-    }
-    
     elsa.display();
     elsa.move();
     ethan.display();
@@ -53,6 +48,11 @@ void draw() {
     emily.move();
     shiv.display();
     shiv.move();
+
+    for (int i = 0; i < sushi.size(); i++) {
+      Sushi s = sushi.get(i);
+      s.shoot();
+    }
 
     theta = 0.3-atan2(600-mouseY, mouseX);
 
