@@ -1,11 +1,11 @@
-//Declare variables //<>//
+//Declare variables //<>// //<>//
 int gMode, timer, number;
 float count;
 Screen title, complete, fail, pau, hel;
 Mat mat;
 Nori nori;
 Rice rice;
-Fish fish;
+Salmon salmon;
 Avocado avocado;
 Sauce sauce;
 Wasabi wasabi;
@@ -26,7 +26,7 @@ void setup() {
   mat = new Mat();
   nori = new Nori();
   rice = new Rice();
-  fish = new Fish();
+  salmon = new Salmon();
   avocado = new Avocado();
   sauce = new Sauce();
   wasabi = new Wasabi();
@@ -58,7 +58,7 @@ void draw() {
     mat.display();
     nori.display();
     rice.display();
-    fish.display();
+    salmon.display();
     avocado.display();
     sauce.display();
     wasabi.display();
@@ -71,8 +71,8 @@ void draw() {
       if (ri == true) {
         rice.rPlace();
       }
-      if (fi == true) {
-        fish.fPlace();
+      if (sa == true) {
+        salmon.fPlace();
       }
       if (av == true) {
         avocado.aPlace();
@@ -98,7 +98,7 @@ void draw() {
     rect(width/2+125, 670, 250, 40);
     fill(255);
     textSize(20);
-    String t = "TIME REMAINING: "+ timer;
+    String t = "TIME: "+ timer;
     text(t, width/2+125, 675);
     rectMode(CENTER);
 
@@ -111,7 +111,7 @@ void draw() {
     textAlign(CENTER);
     fill(0);
     String num = "ORDER #" + number + ": ";
-    String order = "1 Nori "+"1 Rice "+f+" Fish "+a+" Avocado "+"1 Sauce "+w+" Wasabi";
+    String order = "1 Nori "+"1 Rice "+f+" salmon "+a+" Avocado "+"1 Sauce "+w+" Wasabi";
     text(num + order, width/2, 23);
 
     //Button to send roll
@@ -124,26 +124,26 @@ void draw() {
     //Complete task?
     if (number > 10) {
       gMode = 3;
-    } 
-    if (gMode == 3) {
-      complete = new Screen();
-      complete.Complete();
     }
-    if (gMode == 4) {
-      pau = new Screen();
-      pau.Pause();
-    }
-    if (gMode == 5) {
-      hel = new Screen();
-      hel.Help();
-    }
+  }
+  if (gMode == 3) {
+    complete = new Screen();
+    complete.Complete();
+  }
+  if (gMode == 4) {
+    pau = new Screen();
+    pau.Pause();
+  }
+  if (gMode == 5) {
+    hel = new Screen();
+    hel.Help();
   }
 }
 
 
 void mouseClicked() {
   //New order by pressing "Send to Waiter" button
-  if (mouseButton == LEFT && dist(mouseX, mouseY, width/2, 670)<=60) {
+  if (mouseButton == LEFT && dist(mouseX, mouseY, width/2-125, 670)<=60) {
     newOrder();
   }
 
@@ -158,7 +158,7 @@ void mouseClicked() {
   }
 
   //New order when game starts
-  if (gMode == 0 || gMode == 4 || gMode == 5) {
+  if (gMode == 0) {
     gMode = 1;
     newOrder();
   }
@@ -167,7 +167,7 @@ void mouseClicked() {
   mat.check();
   nori.check();
   rice.check();
-  fish.check();
+  salmon.check();
   avocado.check();
   sauce.check();
   wasabi.check();
@@ -183,7 +183,7 @@ void newOrder() {
   ma = false;
   no = false;
   ri = false;
-  fi = false;
+  sa = false;
   av = false;
   sa = false;
   wa = false;

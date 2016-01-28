@@ -46,7 +46,7 @@ class Screen {
     fill(255);
     textSize(20);
     String des = "1 - INGREDIENTS: Click on ingredient on the side, then the mat to place the ingredient. 2 - WAITER: Click the send to waiter button to send the sushi. 3 - Pay attention to time!";
-    text(des, 250, height/2, 800, height);
+    text(des, width/2, height/2+400, 800, height);
   }
   void Complete() {
     background(0);
@@ -63,7 +63,7 @@ class Screen {
     fill(255);
     textSize(20);
     String des = "CONGRATULATIONS! You have completed the MANUFACTURING stage. However, your existential crisis is NOT OVER YET. To eat or to serve? That is the question.";
-    text(des, 250, height/2, 800, height);
+    text(des, width/2, height/2+400, 800, height);
   }
   
 }

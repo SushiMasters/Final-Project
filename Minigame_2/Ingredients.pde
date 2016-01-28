@@ -1,5 +1,5 @@
 class Ingredients {
-  PImage mat, nori, rice, fish, avocado, sauce, wasabi;
+  PImage mat, nori, rice, salmon, avocado, sauce, wasabi;
   Ingredients() {
   }
 }
@@ -73,15 +73,15 @@ class Rice extends Ingredients {
   }
 }
 
-class Fish extends Ingredients {
-  Fish() {
-    fish = loadImage("fish.png");
+class Salmon extends Ingredients {
+  Salmon() {
+    salmon = loadImage("salmon.png");
   }
   void display() {
-    image(fish, width-200-80, 50+165+40);
+    image(salmon, width-200-80, 50+165+40);
     textSize(20);
     fill(0);
-    text("FISH", width-180, 365);
+    text("SALMON", width-180, 365);
   }
   void fPlace() {
     if (fi == true) {
@@ -90,7 +90,7 @@ class Fish extends Ingredients {
       rect(width/2, height/2-50, 500, 300);
       textSize(20);
       fill(255, 0, 0);
-      text("FISH", width-180, 365);
+      text("SALMON", width-180, 365);
     }
   }
   void check() {
