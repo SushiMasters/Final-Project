@@ -43,13 +43,14 @@ void draw() {
   } else if (mode ==1) {
 
     image(restaurant, 0, 0);
-    textAlign(CENTER, TOP);
-    textSize(50);
+    textAlign(LEFT);
+    textSize(30);
     fill(300, 300, 300);
-    text(countDown + " more rolls until you finish your training!", width/2, height/2);
+    text(countDown + " more rolls...", 25, height -50);
 
     //mouth.set(x+181, y+419);
-    mouth.set(x+97, y+200);
+    mouth.set(x+90, y-100);
+    println(x+","+y);
 
     elsa.display();
     elsa.move();
@@ -62,10 +63,11 @@ void draw() {
 
     for (int i = 0; i < sushi.size(); i++) {
       Sushi s = sushi.get(i);
+      s.display();
       s.shoot();
       if (s.touches(mouth)) {
-        s.getsEaten();
         countDown -=1;
+        s.getsEaten();
       }
     }
 
@@ -115,7 +117,7 @@ void draw() {
     fill(255);
     textSize(40);
     String des = "Sushi Master                  <60 seconds         Sushi Novice               60-90 seconds         Sushi Apprentice       90-120 seconds         Sashimi Wannabe         >120 seconds";
-    text(des, 250, height/2-75, 800, height);
+    text(des, 250, height/2-50, 800, height);
   }
 }
 
