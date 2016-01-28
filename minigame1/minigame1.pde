@@ -1,6 +1,7 @@
+//Declare variables
 float bx, by, mode, count;
 int score, timer;
-PImage bucket, boat, worm, bottle, can, hourglass;
+PImage bucket, boat, worm, bottle, can, hourglass, helpicon, help, back;
 Fish f;
 Shark s;
 Trash b, c;
@@ -9,6 +10,7 @@ void setup() {
   size(1280, 720);
   frameRate(30);
 
+  //Initialize
   f = new Fish();
   s = new Shark();
   b = new Trash();
@@ -20,6 +22,9 @@ void setup() {
   bottle = loadImage("bottle.png");
   can = loadImage("can.png");
   hourglass = loadImage("timer.png");
+  helpicon = loadImage("help.png");
+  help = loadImage("helpscreen.jpg");
+  back = loadImage("back.png");
 
   bx = width/2;
   by = 0;
@@ -30,6 +35,7 @@ void setup() {
 }
 
 void draw() {
+  //Title screen
   if (mode == 0) {
     background(0);
     fill(255);
@@ -43,7 +49,7 @@ void draw() {
     text("click to continue...", width/2, height/2+200);
     fill(255);
     textSize(20);
-    String des = "Catch 20 fish! Watch out for garbage and sharks.";
+    String des = "Catch 10 fish! Watch out for garbage and sharks.";
     text(des, 250, height/2, 800, height);
   }
   
@@ -61,6 +67,13 @@ void draw() {
     textAlign(CENTER);
     textSize(50);
     text(score, 70, 130);
+    
+    //Help?
+    image(helpicon, width - 50, 25);
+    //If help icon is clicked
+    if(mousePressed && mouseX > width - 50 && mouseX < width - 20 && mouseY > 25 && mouseY < 55) {
+      mode = 2;
+    }
 
     //Boat
     image(boat, bx, by);
@@ -79,6 +92,7 @@ void draw() {
     //Fish
     f.swim();
     f.hook(bx - 50, mouseY, bx);
+    //If fish has been brought above water
     if (f.isCaught()) {
       score += 1;
       f.reset();
@@ -88,12 +102,14 @@ void draw() {
     b.drift(bottle);
     c.drift(can);
 
+    //If fish is on hook and is in contact with obstacle
     if (s.contact() || b.contact() || c.contact()) {
       f.reset();
       timer += 5;
       fill(255, 0, 0);
     }
 
+    //Timer
     count += 1;
     if (count == 30) {
       timer += 1;
@@ -103,15 +119,25 @@ void draw() {
     textSize(100);
     textAlign(LEFT);
     text(timer, width - 250, 100);
-
     fill(255);
 
-    if (score == 20) {
-      mode = 2;
+    //End game
+    if (score == 10) {
+      mode = 3;
     }
   }
   
+  //Help screen
   if (mode == 2) {
+    image(help, 0, 0);
+    image(back, width - 100, height - 100);
+    if(mousePressed && mouseX > width - 100 && mouseX < width && mouseY > height - 100 && mouseY < height) {
+      mode = 1;
+    }
+  }
+  
+  //End screen
+  if (mode == 3) {
     background(0);
     fill(255);
     textAlign(CENTER, TOP);
@@ -130,6 +156,7 @@ void draw() {
   }
 }
 
+//Click to continue
 void mousePressed() {
   if (mode == 0) {
     mode = 1;
