@@ -18,7 +18,7 @@ class Sushi {
   }
 
   boolean touches(PVector mouth) {
-   if (loc.dist(mouth) <=10) {
+   if (loc.dist(mouth) <=60) {
      println("caught it in frame " + frameCount);
      return true;
    } else {

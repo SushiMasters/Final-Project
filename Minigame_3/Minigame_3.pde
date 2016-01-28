@@ -35,10 +35,10 @@ void draw() {
     fill(150);
     textSize(50);     
     text("click to continue...", width/2, height/2+200);
-    textAlign(LEFT);
+    textAlign(CENTER);
     fill(255);
-    textSize(20);
-    String des = "Fill up the bellies of the hungry tech students with your powerful sushi cannon! Stuff them with 10 rolls to finish the sushi saga! Good luck, young sushi student.";
+    textSize(30);
+    String des = "Click to shoot sushi into the mouths of hungry tech students with your powerful sushi cannon. Stuff them with 10 rolls to finish the sushi saga! Good luck, young seaweed snacker.";
     text(des, 250, height/2, 800, height);
   } else if (mode ==1) {
 
@@ -46,7 +46,7 @@ void draw() {
     textAlign(CENTER, TOP);
     textSize(50);
     fill(300, 300, 300);
-    text(countDown + "more rolls until you finish your training!", width/2, height/2);
+    text(countDown + " more rolls until you finish your training!", width/2, height/2);
 
     //mouth.set(x+181, y+419);
     mouth.set(x+97, y+200);
@@ -76,6 +76,46 @@ void draw() {
     rotate(theta);
     image(cannon, -40, -100);
     popMatrix();
+
+    if (countDown ==0) {
+      mode = 2;
+    }
+  }
+
+  if (mode ==2) {
+    background(0);
+    fill(255);
+    textAlign(CENTER, TOP);
+    textSize(100);
+    text("[ T H E   E N D ]", width/2, height/2-250);
+    textSize(75);
+    text("CONGRATULATIONS", width/2, height/2-125);
+    fill(150);
+    textSize(50);     
+    text("click for your score...", width/2, height/2+200);
+    textAlign(CENTER);
+    fill(255);
+    textSize(50);
+    String des = "You have finished your training, young salmon snippet.";
+    text(des, 250, height/2, 800, height);
+  }
+
+  if (mode ==3) {
+    background(0);
+    fill(255);
+    textAlign(CENTER, TOP);
+    textSize(100);
+    text("[ S C O R E ]", width/2, height/2-250);
+    textSize(50);
+    text("You are a...", width/2, height/2-125);
+    fill(150);
+    textSize(50);     
+    text("click to beat your score...", width/2, height/2+200);
+    textAlign(LEFT);
+    fill(255);
+    textSize(40);
+    String des = "Sushi Master                  <60 seconds         Sushi Novice               60-90 seconds         Sushi Apprentice       90-120 seconds         Sashimi Wannabe         >120 seconds";
+    text(des, 250, height/2-75, 800, height);
   }
 }
 
@@ -89,5 +129,9 @@ void mousePressed() {
     if (frameCount > timer + 3) {
       sushi.add(new Sushi(262*cos(theta)-50, 460+262*sin(theta)));
     }
+  }
+
+  if ( mode == 2) {
+    mode = 3;
   }
 }
