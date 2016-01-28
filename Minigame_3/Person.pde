@@ -21,15 +21,16 @@ class Person {
       img = loadImage("elsa.PNG");
       y = 425;
     }
-
+    
+    img.resize(198, 300);  //resize images
+    
     pos = new PVector(random(540, 1280), y);  //name PVectors
     pace = new PVector(random(-4, 4), 0);
     mouth = new PVector(pos.x+100, pos.y+80);
   }
 
-  void display() {  //display and resize images of people
-    image(img, pos.x, pos.y);  
-    img.resize(198, 300);
+  void display() {  //display images of people
+    image(img, pos.x, pos.y);
   }
 
   void move() {  //have people turn around at at edge of screen and at 540
