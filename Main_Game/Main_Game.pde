@@ -1,7 +1,7 @@
 //MINIGAME 1
 float bx, by, mode, count;
 int score, timer;
-PImage bucket, boat, worm, bottle, can, hourglass, helpicon, help, back;
+PImage title, bucket, boat, worm, bottle, can, hourglass, helpicon, help, back;
 Fish f;
 Shark s;
 Trash b, c;
@@ -28,6 +28,8 @@ Person emily, ethan, elsa, shiv;
 int countDown;  //name variables
 
 void setup() {
+  title = loadImage("title.jpg");
+
   //MINIGAME 1
   size(1280, 720);
   frameRate(30);
@@ -50,7 +52,7 @@ void setup() {
 
   bx = width/2;
   by = 0;
-  mode = 1;
+  mode = 0;
   score = 0;
   count = 0;
   timer = 0;
@@ -95,6 +97,11 @@ void setup() {
 }
 
 void draw() {
+  if (mode == 0) {
+    image(title, 0, 0);
+  }
+
+  //MINIGAME 1
   //Title screen
   if (mode == 1) {
     background(0);
@@ -396,38 +403,43 @@ void draw() {
 //9: Scores
 
 void mouseClicked() {
-  if (mode == 1) {
-   mode = 2;
-  }
-  
-  //MINIGAME 2
-  if (mode == 4) {
-   mode = 5;
-   newOrder();
-  }
-  
-  //MINIGAME 3
-  if (mode == 6) {
-   mode = 7;
+  if (mode == 0 && mouseX > 30 && mouseX < 280 && mouseY > 550 && mouseY < height) {
+    mode = 1;
     counter = frameCount;
   }
-  
-  if (mode == 7 && frameCount > counter + 3) {  //you can only click-shoot sushi after 3 frames have passed since you started the game
-      sushi.add(new Sushi(262*cos(theta)-50, 460+262*sin(theta)));
+
+  if (mode == 1 && frameCount > counter + 1) { //Counter prevents skipping title screens
+    mode = 2;
+  }
+
+  //MINIGAME 2
+  if (mode == 4) {
+    mode = 5;
+    newOrder();
+  }
+
+  //MINIGAME 3
+  if (mode == 6) {
+    mode = 7;
+    counter = frameCount;
+  }
+
+  if (mode == 7 && frameCount > counter + 1) {
+    sushi.add(new Sushi(262*cos(theta)-50, 460+262*sin(theta)));
   }
   if (mode == 8) {  //show score if you click on end screen
     mode = 9;
     counter = frameCount;
   }
-  
+
   //Reset game
-  if(mode == 9 && frameCount > counter + 3) {
-    mode = 1;
+  if (mode == 9 && frameCount > counter + 1) {
+    mode = 0;
     timer = 0;
     score = 0;
     number = 0;
   }
-  
+
   //New order by pressing "Send to Waiter" button
   if (mouseButton == LEFT && dist(mouseX, mouseY, width/2-125, 670)<=60 && mode == 5) {
     newOrder();
