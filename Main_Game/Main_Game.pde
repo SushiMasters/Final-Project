@@ -1,6 +1,10 @@
-//MINIGAME 1
-float bx, by, mode, count;
+//GLOBAL
+float mode, count;
 int score, timer;
+Screen oneTitle, oneEnd, twoTitle, twoEnd, threeTitle, threeEnd, complete;
+
+//MINIGAME 1
+float bx, by;
 PImage bucket, boat, worm, bottle, can, hourglass, helpicon, help, back;
 Fish f;
 Shark s;
@@ -9,7 +13,6 @@ Trash b, c;
 
 //MINIGAME 2
 int number;
-Screen title, complete;
 Mat mat;
 Nori nori;
 Rice rice;
@@ -33,6 +36,8 @@ void setup() {
   frameRate(30);
 
   //Initialize
+
+  //M1-------------------------------------------------------------------------------------------------------------
   f = new Fish();
   s = new Shark();
   b = new Trash();
@@ -56,10 +61,9 @@ void setup() {
   timer = 0;
 
 
-  //MINIGAME 2
+  //M2-------------------------------------------------------------------------------------------------------------
   number = 0;
 
-  //Intialize
   mat = new Mat();
   nori = new Nori();
   rice = new Rice();
@@ -78,7 +82,7 @@ void setup() {
   wa = false;
 
 
-  //MINIGAME 3
+  //MINIGAME 3-------------------------------------------------------------------------------------------------------------
   restaurant = loadImage("restaurant.jpg");  //load images
   cannon = loadImage("cannon.png");  
 
@@ -95,22 +99,10 @@ void setup() {
 }
 
 void draw() {
-  //Title screen
+  //Title screen for M1-------------------------------------------------------------------------------------------------------------
   if (mode == 0) {
-    background(0);
-    fill(255);
-    textAlign(CENTER, TOP);
-    textSize(100);
-    text("[ M I N I G A M E  1 ]", width/2, height/2-250);
-    textSize(75);
-    text("FISHING", width/2, height/2-125);
-    fill(150);
-    textSize(50);
-    text("click to continue...", width/2, height/2+200);
-    fill(255);
-    textSize(20);
-    String des = "Catch 10 fish! Watch out for garbage and sharks.";
-    text(des, 250, height/2, 800, height);
+    oneTitle = new Screen();
+    oneTitle.Title1();
   }
 
   if (mode == 1) {
@@ -182,7 +174,7 @@ void draw() {
     fill(255);
 
     //End game
-    if (score == 1) {
+    if (score ==1) {
       mode = 3;
     }
   }
@@ -196,127 +188,96 @@ void draw() {
     }
   }
 
-  //End screen
+  //End screen for M1
   if (mode == 3) {
-    background(0);
-    fill(255);
-    textAlign(CENTER, TOP);
-    textSize(100);
-    text("[ M I N I G A M E  1 ]", width/2, height/2-250);
-    textSize(75);
-    fill(0, 255, 0);
-    text("COMPLETE", width/2, height/2-125);
-    fill(150);
-    textSize(50);
-    text("click to continue...", width/2, height/2+200);
-    fill(255);
-    textSize(20);
-    String des = "Great job! You caught the fish for the sushi!";
-    text(des, 250, height/2, 800, height);
-  }
+    oneEnd = new Screen();
+    oneEnd.End1();
+  } else
 
+    //MINIGAME 2-------------------------------------------------------------------------------------------------------------
+    //Title Screen
+    if (mode == 4) {
+      twoTitle = new Screen();
+      twoTitle.Title2();
+    } else if (mode == 5) {
+      //M2 Setup screen
 
-  //MINIGAME 2
-  //Title Screen
-  if (mode == 4) {
-    title = new Screen();
-    title.Title();
-  }
+      //Display images & labels
+      mat.display();
+      nori.display();
+      rice.display();
+      salmon.display();
+      avocado.display();
+      sauce.display();
+      wasabi.display();
 
-  //Setup screen
-  if (mode == 5) {
+      //Check when to place item
+      if (ma == true) {
+        if (no == true) {
+          nori.nPlace();
+        }
+        if (ri == true) {
+          rice.rPlace();
+        }
+        if (fi == true) {
+          salmon.fPlace();
+        }
+        if (av == true) {
+          avocado.aPlace();
+        }
+        if (sa == true) {
+          sauce.sPlace();
+        }
+        if (wa == true) {
+          wasabi.wPlace();
+        }
+      }
 
-    //Display images & labels
-    mat.display();
-    nori.display();
-    rice.display();
-    salmon.display();
-    avocado.display();
-    sauce.display();
-    wasabi.display();
+      //Countdown
+      count +=1;
+      if (count == 30) {
+        timer +=1;
+        count = 0;
+      }
 
-    //Check when to place item
-    if (ma == true) {
-      if (no == true) {
-        nori.nPlace();
-      }
-      if (ri == true) {
-        rice.rPlace();
-      }
-      if (sa == true) {
-        salmon.fPlace();
-      }
-      if (av == true) {
-        avocado.aPlace();
-      }
-      if (sa == true) {
-        sauce.sPlace();
-      }
-      if (wa == true) {
-        wasabi.wPlace();
+      //Show timer
+      rectMode(CENTER);
+      fill(255, 0, 0);
+      rect(width/2+125, 670, 250, 40);
+      fill(255);
+      textSize(20);
+      String t = "TIME: "+ timer;
+      text(t, width/2+125, 675);
+
+      //Button to send roll
+      fill(0);
+      rect(width/2-125, 670, 200, 40);
+      text("SEND TO WAITER", width/2-125, 675);
+
+      //Order
+      fill(0);
+      textAlign(CENTER);
+      String num = "ORDER #" + number + ": ";
+      String order = "1 Nori "+"1 Rice "+fis+" salmon "+a+" Avocado "+"1 Sauce "+w+" Wasabi";
+      text(num + order, width/2, 23);
+
+      //Complete task?
+      if (number > 10) {
+        mode = 6;
       }
     }
 
-    //Countdown
-    count +=1;
-    if (count == 30) {
-      timer +=1;
-      count = 0;
-    }
-
-    //Show timer
-    fill(255, 0, 0);
-    stroke(0);
-    rect(width/2+125, 670, 250, 40);
-    fill(255);
-    textSize(20);
-    String t = "TIME: "+ timer;
-    text(t, width/2+125, 675);
-    rectMode(CENTER);
-
-    //Order
-    textSize(20);
-    textAlign(CENTER);
-    fill(0);
-    String num = "ORDER #" + number + ": ";
-    String order = "1 Nori "+"1 Rice "+fis+" salmon "+a+" Avocado "+"1 Sauce "+w+" Wasabi";
-    text(num + order, width/2, 23);
-
-    //Button to send roll
-    stroke(0);
-    rect(width/2-125, 670, 200, 40);
-    fill(255);
-    text("SEND TO WAITER", width/2-125, 675);
-    rectMode(CENTER);
-
-    //Complete task?
-    if (number > 10) {
-      mode = 6;
-    }
-  }
+  //Triggers end screen
   if (mode == 6) {
-    complete = new Screen();
-    complete.Complete();
+    twoEnd = new Screen();
+    twoEnd.End2();
   }
 
 
-  //MINIGAME 3
+  //MINIGAME 3-------------------------------------------------------------------------------------------------------------
   if (mode==7) {  //TITLE SCREEN
-    background(0);
-    fill(255);
-    textAlign(CENTER, TOP);
-    textSize(100);
-    text("[ M I N I G A M E  3 ]", width/2, height/2-250);
-    textSize(75);
-    text("DISSEMINATION", width/2, height/2-125);
-    fill(150);
-    textSize(50);     
-    text("click to continue...", width/2, height/2+200);
-    textAlign(CENTER);
-    fill(255);
-    textSize(30);
-    String des = "Click to shoot sushi into the mouths of hungry tech students with your powerful sushi cannon. Stuff them with 10 rolls to finish the sushi saga! Good luck, young seaweed snacker.";
-    text(des, width/2, height/2+300, 800, height);
+    threeTitle = new Screen();
+    threeTitle.Title3();
   } else if (mode ==8) {
 
     image(restaurant, 0, 0);  //make background and show sushi you need to win
@@ -358,100 +319,59 @@ void draw() {
   }
 
   if (mode ==9) {  //END SCREEN
-    background(0);
-    fill(255);
-    textAlign(CENTER, TOP);
-    textSize(100);
-    text("[ T H E   E N D ]", width/2, height/2-250);
-    textSize(75);
-    text("CONGRATULATIONS", width/2, height/2-125);
-    fill(150);
-    textSize(50);     
-    text("click for your score...", width/2, height/2+200);
-    textAlign(CENTER);
-    fill(255);
-    textSize(50);
-    String des = "You have finished your training, young salmon snippet.";
-    text(des, width/2, height/2+400, 800, height);
+    threeEnd = new Screen();
+    threeEnd.End3();
   }
 
   if (mode ==10) {  //SCORE SCREEN
-    background(0);
-    fill(255);
-    textAlign(CENTER, TOP);
-    textSize(100);
-    text("[ S C O R E ]", width/2, height/2-250);
-    textSize(50);
-    text("You are a...", width/2, height/2-125);
-    fill(150);
-    textSize(50);     
-    text("click to beat your score...", width/2, height/2+200);
-    textAlign(LEFT);
-    fill(255);
-    textSize(40);
-    String des = "Sushi Master                  <60 seconds         Sushi Novice               60-90 seconds         Sushi Apprentice       90-120 seconds         Sashimi Wannabe         >120 seconds";
-    text(des, width/2, height/2+300, 800, height);
+    complete = new Screen();
+    complete.Complete();
   }
 }
 
 
 void mouseClicked() {
-  if (mode == 0) {
-    mode = 1;
+  //Minigame screens-------------------------------------------------------------------------------------------------------------
+  if (mode == 0) { //M1 Title
+    mode = 1; //M1
+  } else if (mode == 3) { //M1 End
+    mode = 4;  
+  } else if (mode == 4) { //M2 Title
+    mode = 5; //M2
+    newOrder();
+  } else if (mode == 6) { //M2 End
+    mode = 7; 
+  } else if (mode == 7) { //M3 Title
+    mode = 8; //M3
+    counter = frameCount;
+  } else if ( mode == 9) {  //M3 End
+    mode = 10; //End screen
+  } else if (mode == 10) {
+    mode = 0; //Restart to M1 Title
   }
-  if (mode == 3) {
-    mode = 4;
-  }
-  if (mode == 4) {
-    mode = 5;
+  
+  //M2-------------------------------------------------------------------------------------------------------------
+  //New order by pressing "Send to Waiter" button
+  if (mouseButton == LEFT && dist(mouseX, mouseY, width/2-125, 670)<=60 && mode == 5) {
     newOrder();
   }
-  if (mode == 6) {
-    mode = 7;
-  }
-  //New order by pressing "Send to Waiter" button
-    if (mouseButton == LEFT && dist(mouseX, mouseY, width/2-125, 670)<=60 && mode == 5) {
-      newOrder();
-    }
-
-    //Check if the item was selected
-    mat.check();
-    nori.check();
-    rice.check();
-    salmon.check();
-    avocado.check();
-    sauce.check();
-    wasabi.check();
+  //Check if the item was selected
+  mat.check();
+  nori.check();
+  rice.check();
+  salmon.check();
+  avocado.check();
+  sauce.check();
+  wasabi.check();
 }
 
 
-//Click to continue
 void mousePressed() {
-  //if (mode == 0) {
-  //  mode = 1;
-  //}
-  //if (mode == 3) {
-  // mode = 4;
-  //}
-  //if (mode == 4) {
-  //mode = 5;
-  //newOrder();
-  //}
-
-  //MINIGAME 3
-  if (mode == 7) {  //start game when you click on title screen
-    mode = 8;
-    counter = frameCount;
-  }
-
+  //MINIGAME 3-------------------------------------------------------------------------------------------------------------
   if (mode == 8) {  //you can only click-shoot sushi after 3 frames have passed since you started the game
     if (frameCount > counter + 3) {
       sushi.add(new Sushi(262*cos(theta)-50, 460+262*sin(theta)));
     }
-  }
-
-  if ( mode == 9) {  //show score if you click on end screen
-    mode = 10;
   }
 }
 
