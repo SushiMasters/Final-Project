@@ -1,7 +1,7 @@
-//Minigame 2: Manufacture  //<>//
+//Declare variables //<>//
 int gMode, timer, number;
 float count;
-Screen title, complete, fail;
+Screen title, complete, fail, pau, hel;
 Mat mat;
 Nori nori;
 Rice rice;
@@ -11,15 +11,18 @@ Sauce sauce;
 Wasabi wasabi;
 boolean ma, no, ri, fi, av, sa, wa;
 int w, f, a;
+PImage pause, help; 
 
 void setup() {
+  //Setup game
   size(1280, 720);
   frameRate(30);
   number = 0;
   gMode=0;
-  timer = 120;
+  timer = 0;
   count = 0;
 
+  //Intialize
   mat = new Mat();
   nori = new Nori();
   rice = new Rice();
@@ -28,6 +31,10 @@ void setup() {
   sauce = new Sauce();
   wasabi = new Wasabi();
 
+  pause = loadImage("pause.png");
+  help = loadImage("help.png");
+
+  //Boolean to control when images show up
   ma = false;
   no = false;
   ri = false;
@@ -38,8 +45,6 @@ void setup() {
 }
 
 void draw() {
-  //Game: Setup
-
   //Title Screen
   if (gMode == 0) {
     title = new Screen();
@@ -48,12 +53,6 @@ void draw() {
 
   //Setup screen
   if (gMode == 1) {
-    count +=1;
-    if (count == 30) {
-      timer -=1;
-      count = 0;
-    }
-
 
     //Display images & labels
     mat.display();
@@ -64,6 +63,7 @@ void draw() {
     sauce.display();
     wasabi.display();
 
+    //Check when to place item
     if (ma == true) {
       if (no == true) {
         nori.nPlace();
@@ -85,12 +85,28 @@ void draw() {
       }
     }
 
-    textSize(20);
-    fill(255, 0, 0);
-    String t = "TIME REMAINING: "+ timer;
-    text(t, width/2, 712);
+    //Countdown
+    count +=1;
+    if (count == 30) {
+      timer +=1;
+      count = 0;
+    }
 
-    //Game: order
+    //Show timer
+    fill(255, 0, 0);
+    stroke(0);
+    rect(width/2+125, 670, 250, 40);
+    fill(255);
+    textSize(20);
+    String t = "TIME REMAINING: "+ timer;
+    text(t, width/2+125, 675);
+    rectMode(CENTER);
+
+    //Pause/help
+    image(pause, 10, 10);
+    image(help, 10, 60);
+
+    //Order
     textSize(20);
     textAlign(CENTER);
     fill(0);
@@ -98,36 +114,56 @@ void draw() {
     String order = "1 Nori "+"1 Rice "+f+" Fish "+a+" Avocado "+"1 Sauce "+w+" Wasabi";
     text(num + order, width/2, 23);
 
+    //Button to send roll
     stroke(0);
-    rect(width/2, 670, 200, 40);
+    rect(width/2-125, 670, 200, 40);
     fill(255);
-    text("SEND TO WAITER", width/2, 675);
+    text("SEND TO WAITER", width/2-125, 675);
     rectMode(CENTER);
 
-    if (number > 20) {
+    //Complete task?
+    if (number > 10) {
       gMode = 3;
     } 
     if (gMode == 3) {
       complete = new Screen();
       complete.Complete();
     }
-    if (number <= 20 && timer<=0) {
-      gMode = 4;
-    }
     if (gMode == 4) {
-      fail = new Screen();
-      fail.Fail();
+      pau = new Screen();
+      pau.Pause();
+    }
+    if (gMode == 5) {
+      hel = new Screen();
+      hel.Help();
     }
   }
 }
+
+
 void mouseClicked() {
+  //New order by pressing "Send to Waiter" button
   if (mouseButton == LEFT && dist(mouseX, mouseY, width/2, 670)<=60) {
     newOrder();
   }
-  if (gMode == 0) {
+
+  //Pause screen
+  if (mouseButton == LEFT && dist(mouseX, mouseY, 10, 10)<=25) {
+    gMode = 4;
+  }
+
+  //Help screen
+  if (mouseButton == LEFT && dist(mouseX, mouseY, 10, 60)<=25) {
+    gMode = 5;
+  }
+
+  //New order when game starts
+  if (gMode == 0 || gMode == 4 || gMode == 5) {
     gMode = 1;
     newOrder();
   }
+
+  //Check if the item was selected
   mat.check();
   nori.check();
   rice.check();
@@ -138,10 +174,12 @@ void mouseClicked() {
 }
 
 void newOrder() {
+  //Another order amount
   w = int(random(2));
   f = int(random(2));
   a = int(random(2));
 
+  //Reset variables
   ma = false;
   no = false;
   ri = false;
@@ -150,5 +188,6 @@ void newOrder() {
   sa = false;
   wa = false;
 
+  //Move on to next order
   number +=1;
 }
