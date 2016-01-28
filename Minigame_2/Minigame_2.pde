@@ -64,25 +64,6 @@ void draw() {
     sauce.display();
     wasabi.display();
 
-    textSize(20);
-    fill(0);
-    String t = "TIME REMAINING: "+ timer;
-    text(t, width/2, 712);
-
-    //Game: order
-    textSize(20);
-    textAlign(CENTER);
-    fill(0);
-    String num = "ORDER #" + number + ": ";
-    String order = "1 Nori "+"1 Rice "+f+" Fish "+a+" Avocado "+"1 Sauce "+w+" Wasabi";
-    text(num + order, width/2, 23);
-
-    stroke(0);
-    rect(width/2, 670, 200, 40);
-    fill(255);
-    text("SEND TO WAITER", width/2, 675);
-    rectMode(CENTER); 
-
     if (ma == true) {
       if (no == true) {
         nori.nPlace();
@@ -104,90 +85,62 @@ void draw() {
       }
     }
 
-    if (no == true) {
-      textSize(20);
-      fill(255, 0, 0);
-      text("NORI", 180, 365);
-    }
-    if (ri == true) {
-      textSize(20);
-      fill(255, 0, 0);
-      text("RICE", 180, 180);
-    }
-    if (fi == true) {
-      textSize(20);
-      fill(255, 0, 0);
-      text("FISH", width-180, 365);
-    }
-    if (av == true) {
-      textSize(20);
-      fill(255, 0, 0);
-      text("AVOCADO", width-180, 620);
-    }
-    if (sa == true) {
-      textSize(20);
-      fill(255, 0, 0);
-      text("SAUCE", 180, 600);
-    }
-    if (wa == true) {
-      textSize(20);
-      fill(255, 0, 0);
-      text("WASABI", width-180, 170);
-    }
+    textSize(20);
+    fill(255, 0, 0);
+    String t = "TIME REMAINING: "+ timer;
+    text(t, width/2, 712);
+
+    //Game: order
+    textSize(20);
+    textAlign(CENTER);
+    fill(0);
+    String num = "ORDER #" + number + ": ";
+    String order = "1 Nori "+"1 Rice "+f+" Fish "+a+" Avocado "+"1 Sauce "+w+" Wasabi";
+    text(num + order, width/2, 23);
+
+    stroke(0);
+    rect(width/2, 670, 200, 40);
+    fill(255);
+    text("SEND TO WAITER", width/2, 675);
+    rectMode(CENTER);
+
     if (number > 20) {
       gMode = 3;
+    } 
+    if (gMode == 3) {
+      complete = new Screen();
+      complete.Complete();
     }
     if (number <= 20 && timer<=0) {
       gMode = 4;
     }
-  }
-
-  if (gMode == 3) {
-    complete = new Screen();
-    complete.Complete();
-  }
-  if (gMode == 4) {
-    fail = new Screen();
-    fail.Fail();
+    if (gMode == 4) {
+      fail = new Screen();
+      fail.Fail();
+    }
   }
 }
-
 void mouseClicked() {
-  if (mouseButton == LEFT && dist(mouseX, mouseY, width/2, 670)<=40) {
+  if (mouseButton == LEFT && dist(mouseX, mouseY, width/2, 670)<=60) {
     newOrder();
   }
-  if (gMode ==1 && dist(mouseX, mouseY, width/2, height/2) <= 500) {
-    ma = true;
-  }
-  if (gMode == 1 && dist(mouseX, mouseY, 180, 365) <= 75) {
-    no = true;
-  }
-  if (gMode == 1 && dist(mouseX, mouseY, 180, 180) <= 75) {
-    ri = true;
-  }
-  if (gMode == 1 && dist(mouseX, mouseY, width-180, 365) <= 75) {
-    fi = true;
-  }
-  if (gMode == 1 && dist(mouseX, mouseY, width-180, 620) <= 75) {
-    av = true;
-  }
-  if (gMode == 1 && dist(mouseX, mouseY, 180, 600) <= 75) {
-    sa = true;
-  }
-  if (gMode == 1 && dist(mouseX, mouseY, width-180, 170) <= 75) {
-    wa = true;
-  }
-
   if (gMode == 0) {
     gMode = 1;
     newOrder();
   }
+  mat.check();
+  nori.check();
+  rice.check();
+  fish.check();
+  avocado.check();
+  sauce.check();
+  wasabi.check();
 }
 
 void newOrder() {
-  w = int(random(1));
-  f = int(random(1));
-  a = int(random(1));
+  w = int(random(2));
+  f = int(random(2));
+  a = int(random(2));
 
   ma = false;
   no = false;

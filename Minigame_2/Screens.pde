@@ -20,7 +20,7 @@ class Screen {
   }
 
   void Complete() {
-     background(0);
+    background(0);
     fill(255);
     textAlign(CENTER, TOP);
     textSize(100);
@@ -37,7 +37,7 @@ class Screen {
     text(des, 250, height/2, 800, height);
   }
   void Fail () {
-     background(0);
+    background(0);
     fill(255);
     textAlign(CENTER, TOP);
     textSize(100);
