@@ -2,8 +2,8 @@ class Trash {
   PVector loc, vel;
 
   Trash() {
-    loc = new PVector(random(width*-1, width*2), random(height/2, height*3/4));
-    vel = new PVector(3, sin(loc.x*.01) * 3);
+    loc = new PVector(random(width*-0.5, width*1.5), random(height/2, height*3/4));
+    vel = new PVector(-3, sin(loc.x*.01) * 3);
   }
 
   void drift(PImage img) {
@@ -23,7 +23,7 @@ class Trash {
   }
   
   boolean contact() {
-    if(f.hookstatus == 1 && bx > loc.x && bx < loc.x+100 && mouseY > loc.y && mouseY < loc.y+100) {
+    if(f.hookstatus == 1 && bx > loc.x && bx < loc.x+150 && mouseY > loc.y && mouseY < loc.y+150) {
       return true;
     } else return false;
   }

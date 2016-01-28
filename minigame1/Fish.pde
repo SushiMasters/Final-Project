@@ -8,8 +8,8 @@ class Fish {
     fish1 = loadImage("fish1.png");
     vfish = loadImage("verticalfish.png");
     hookstatus = 0;
-    loc = new PVector(random(width*-1, width*2), random(height/4, height*3/4));
-    vel = new PVector(6, 0);
+    loc = new PVector(random(width*-0.5, width*1.5), random(height/4, height*3/4));
+    vel = new PVector(8, 0);
   }
 
   void swim() {
@@ -45,7 +45,7 @@ class Fish {
   }
 
   void reset() {
-    loc = new PVector(random(width*-1, width*2), random(height/4, height*3/4));
+    loc = new PVector(random(width*-0.5, width*1.5), random(height/4, height*3/4));
     hookstatus = 0;
   }
 

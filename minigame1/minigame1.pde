@@ -1,6 +1,6 @@
 float bx, by, mode, count;
 int score, timer;
-PImage bucket, boat, worm, bottle, can;
+PImage bucket, boat, worm, bottle, can, hourglass;
 Fish f;
 Shark s;
 Trash b, c;
@@ -8,18 +8,19 @@ Trash b, c;
 void setup() {
   size(1280, 720);
   frameRate(30);
-  
+
   f = new Fish();
   s = new Shark();
   b = new Trash();
   c = new Trash();
-  
+
   bucket = loadImage("bucket.png");
   boat = loadImage("boat.png");
   worm = loadImage("worm.png");
   bottle = loadImage("bottle.png");
   can = loadImage("can.png");
-  
+  hourglass = loadImage("timer.png");
+
   bx = width/2;
   by = 0;
   mode = 0;
@@ -40,14 +41,13 @@ void draw() {
     fill(150);
     textSize(50);
     text("click to continue...", width/2, height/2+200);
-    textAlign(LEFT);
     fill(255);
     textSize(20);
-    String des = "Catch as many fish as you can! Watch out for garbage and the shark though.";
+    String des = "Catch 20 fish! Watch out for garbage and sharks.";
     text(des, 250, height/2, 800, height);
-    
-  } else {
-    
+  }
+  
+  if (mode == 1) {
     //Water and sky
     noStroke();
     fill(105, 250, 255);
@@ -75,7 +75,7 @@ void draw() {
 
     //Shark
     s.swim();
-    
+
     //Fish
     f.swim();
     f.hook(bx - 50, mouseY, bx);
@@ -83,25 +83,50 @@ void draw() {
       score += 1;
       f.reset();
     }
-    
+
     //Trash
     b.drift(bottle);
     c.drift(can);
-    
-    if(s.contact()) {
+
+    if (s.contact() || b.contact() || c.contact()) {
       f.reset();
       timer += 5;
       fill(255, 0, 0);
     }
-    
+
     count += 1;
-    if(count == 30) {
+    if (count == 30) {
       timer += 1;
       count = 0;
     }
-    text(timer, width - 100, 100);
-    
+    image(hourglass, width - 330, 10);
+    textSize(100);
+    textAlign(LEFT);
+    text(timer, width - 250, 100);
+
     fill(255);
+
+    if (score == 20) {
+      mode = 2;
+    }
+  }
+  
+  if (mode == 2) {
+    background(0);
+    fill(255);
+    textAlign(CENTER, TOP);
+    textSize(100);
+    text("[ M I N I G A M E  1 ]", width/2, height/2-250);
+    textSize(75);
+    fill(0, 255, 0);
+    text("COMPLETE", width/2, height/2-125);
+    fill(150);
+    textSize(50);
+    text("click to continue...", width/2, height/2+200);
+    fill(255);
+    textSize(20);
+    String des = "Great job! You caught the fish for the sushi!";
+    text(des, 250, height/2, 800, height);
   }
 }
 
