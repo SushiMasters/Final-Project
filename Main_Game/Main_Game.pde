@@ -9,7 +9,6 @@ Trash b, c;
 
 //MINIGAME 2
 int number;
-Screen title, complete;
 Mat mat;
 Nori nori;
 Rice rice;
@@ -29,6 +28,7 @@ Person emily, ethan, elsa, shiv;
 int countDown;  //name variables
 
 void setup() {
+  //MINIGAME 1
   size(1280, 720);
   frameRate(30);
 
@@ -50,7 +50,7 @@ void setup() {
 
   bx = width/2;
   by = 0;
-  mode = 0;
+  mode = 1;
   score = 0;
   count = 0;
   timer = 0;
@@ -96,7 +96,7 @@ void setup() {
 
 void draw() {
   //Title screen
-  if (mode == 0) {
+  if (mode == 1) {
     background(0);
     fill(255);
     textAlign(CENTER, TOP);
@@ -109,12 +109,12 @@ void draw() {
     text("click to continue...", width/2, height/2+200);
     fill(255);
     textSize(20);
-    String des = "Catch 10 fish! Watch out for garbage and sharks.";
-    text(des, 250, height/2, 800, height);
+    text("Catch 10 fish! Watch out for garbage and sharks.", width/2, height - 300);
   }
 
-  if (mode == 1) {
+  if (mode == 2) {
     //Water and sky
+    rectMode(LEFT);
     noStroke();
     fill(105, 250, 255);
     rect(0, 0, width, height);
@@ -132,7 +132,7 @@ void draw() {
     image(helpicon, width - 50, 25);
     //If help icon is clicked
     if (mousePressed && mouseX > width - 50 && mouseX < width - 20 && mouseY > 25 && mouseY < 55) {
-      mode = 2;
+      mode = 3;
     }
 
     //Boat
@@ -183,12 +183,12 @@ void draw() {
 
     //End game
     if (score == 1) {
-      mode = 3;
+      mode = 4;
     }
   }
 
   //Help screen
-  if (mode == 2) {
+  if (mode == 3) {
     image(help, 0, 0);
     image(back, width - 100, height - 100);
     if (mousePressed && mouseX > width - 100 && mouseX < width && mouseY > height - 100 && mouseY < height) {
@@ -196,31 +196,24 @@ void draw() {
     }
   }
 
-  //End screen
-  if (mode == 3) {
+
+  //MINIGAME 2
+  if (mode == 4) {
     background(0);
     fill(255);
     textAlign(CENTER, TOP);
     textSize(100);
-    text("[ M I N I G A M E  1 ]", width/2, height/2-250);
+    text("[ M I N I G A M E  2 ]", width/2, height/2-250);
     textSize(75);
-    fill(0, 255, 0);
-    text("COMPLETE", width/2, height/2-125);
+    text("MANUFACTURING", width/2, height/2-125);
     fill(150);
     textSize(50);
     text("click to continue...", width/2, height/2+200);
+    textAlign(CENTER);
     fill(255);
     textSize(20);
-    String des = "Great job! You caught the fish for the sushi!";
-    text(des, 250, height/2, 800, height);
-  }
-
-
-  //MINIGAME 2
-  //Title Screen
-  if (mode == 4) {
-    title = new Screen();
-    title.Title();
+    String des = "In this stage, you'll be making 10 pieces of sushi. Click on the ingredient and then the mat to deposit the ingredient. Speed and accuracy are qualities essential to every aspiring sushi chef.";
+    text(des, 300, height/2, width - 300, height);
   }
 
   //Setup screen
@@ -257,7 +250,7 @@ void draw() {
       }
     }
 
-    //Countdown
+    //Timer
     count +=1;
     if (count == 30) {
       timer +=1;
@@ -267,7 +260,7 @@ void draw() {
     //Show timer
     fill(255, 0, 0);
     stroke(0);
-    rect(width/2+125, 670, 250, 40);
+    rect(755, 670, 250, 40);
     fill(255);
     textSize(20);
     String t = "TIME: "+ timer;
@@ -290,18 +283,14 @@ void draw() {
     rectMode(CENTER);
 
     //Complete task?
-    if (number > 10) {
+    if (number == 5) {
       mode = 6;
     }
-  }
-  if (mode == 6) {
-    complete = new Screen();
-    complete.Complete();
   }
 
 
   //MINIGAME 3
-  if (mode==7) {  //TITLE SCREEN
+  if (mode==6) {  //TITLE SCREEN
     background(0);
     fill(255);
     textAlign(CENTER, TOP);
@@ -317,7 +306,7 @@ void draw() {
     textSize(30);
     String des = "Click to shoot sushi into the mouths of hungry tech students with your powerful sushi cannon. Stuff them with 10 rolls to finish the sushi saga! Good luck, young seaweed snacker.";
     text(des, width/2, height/2+300, 800, height);
-  } else if (mode ==8) {
+  } else if (mode == 7) {
 
     image(restaurant, 0, 0);  //make background and show sushi you need to win
     textAlign(LEFT);
@@ -352,12 +341,12 @@ void draw() {
     image(cannon, -40, -100);
     popMatrix();
 
-    if (countDown ==0) {  //when you shoot enough sushi into mouths, then the game ends
-      mode = 9;
+    if (countDown == 0) {  //when you shoot enough sushi into mouths, then the game ends
+      mode = 8;
     }
   }
 
-  if (mode ==9) {  //END SCREEN
+  if (mode == 8) {  //END SCREEN
     background(0);
     fill(255);
     textAlign(CENTER, TOP);
@@ -375,7 +364,7 @@ void draw() {
     text(des, width/2, height/2+400, 800, height);
   }
 
-  if (mode ==10) {  //SCORE SCREEN
+  if (mode == 9) {  //SCORE SCREEN
     background(0);
     fill(255);
     textAlign(CENTER, TOP);
@@ -395,65 +384,65 @@ void draw() {
 }
 
 
+//Gamemodes:
+//1: Minigame 1 title screen
+//2: Minigame 1 gameplay
+//3: Minigame 1 help screen
+//4: Minigame 2 title screen
+//5: Minigame 2 gameplay
+//6: Minigame 3 title screen
+//7: Minigame 3 gameplay
+//8: Minigame 3 end screen
+//9: Scores
+
 void mouseClicked() {
-  if (mode == 0) {
-    mode = 1;
+  if (mode == 1) {
+   mode = 2;
   }
-  if (mode == 3) {
-    mode = 4;
-  }
+  
+  //MINIGAME 2
   if (mode == 4) {
-    mode = 5;
-    newOrder();
+   mode = 5;
+   newOrder();
   }
-  if (mode == 6) {
-    mode = 7;
-  }
-  //New order by pressing "Send to Waiter" button
-    if (mouseButton == LEFT && dist(mouseX, mouseY, width/2-125, 670)<=60 && mode == 5) {
-      newOrder();
-    }
-
-    //Check if the item was selected
-    mat.check();
-    nori.check();
-    rice.check();
-    salmon.check();
-    avocado.check();
-    sauce.check();
-    wasabi.check();
-}
-
-
-//Click to continue
-void mousePressed() {
-  //if (mode == 0) {
-  //  mode = 1;
-  //}
-  //if (mode == 3) {
-  // mode = 4;
-  //}
-  //if (mode == 4) {
-  //mode = 5;
-  //newOrder();
-  //}
-
+  
   //MINIGAME 3
-  if (mode == 7) {  //start game when you click on title screen
-    mode = 8;
+  if (mode == 6) {
+   mode = 7;
     counter = frameCount;
   }
-
-  if (mode == 8) {  //you can only click-shoot sushi after 3 frames have passed since you started the game
-    if (frameCount > counter + 3) {
+  
+  if (mode == 7 && frameCount > counter + 3) {  //you can only click-shoot sushi after 3 frames have passed since you started the game
       sushi.add(new Sushi(262*cos(theta)-50, 460+262*sin(theta)));
-    }
+  }
+  if (mode == 8) {  //show score if you click on end screen
+    mode = 9;
+    counter = frameCount;
+  }
+  
+  //Reset game
+  if(mode == 9 && frameCount > counter + 3) {
+    mode = 1;
+    timer = 0;
+    score = 0;
+    number = 0;
+  }
+  
+  //New order by pressing "Send to Waiter" button
+  if (mouseButton == LEFT && dist(mouseX, mouseY, width/2-125, 670)<=60 && mode == 5) {
+    newOrder();
   }
 
-  if ( mode == 9) {  //show score if you click on end screen
-    mode = 10;
-  }
+  //Check if the item was selected
+  mat.check();
+  nori.check();
+  rice.check();
+  salmon.check();
+  avocado.check();
+  sauce.check();
+  wasabi.check();
 }
+
 
 
 //MINIGAME 2
