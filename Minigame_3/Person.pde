@@ -2,9 +2,9 @@ class Person {
   PImage img;
   PVector pos, pace;
   PVector mouth;
-  float y;
+  float y;  //name variables
 
-  Person(int which) {
+  Person(int which) {  //have different images and y-positions for different people
     if (which == 0) {
       img = loadImage("shiv.png");
       y = 375;
@@ -22,17 +22,17 @@ class Person {
       y = 425;
     }
 
-    pos = new PVector(random(540, 1280), y);//random(375, 425)
+    pos = new PVector(random(540, 1280), y);  //name PVectors
     pace = new PVector(random(-4, 4), 0);
     mouth = new PVector(pos.x+100, pos.y+80);
   }
 
-  void display() {
-    image(img, pos.x, pos.y);
+  void display() {  //display and resize images of people
+    image(img, pos.x, pos.y);  
     img.resize(198, 300);
   }
 
-  void move() {
+  void move() {  //have people turn around at at edge of screen and at 540
     mouth.x = pos.x+90;
     if (pos.x >= 1150) {
       pace.set(random(-4, -2), 0);
