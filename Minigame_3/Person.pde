@@ -10,7 +10,7 @@ class Person {
       y = 375;
     }
     if (which ==1) {
-      img = loadImage("ethan.png");
+      img = loadImage("ethan.PNG");
       y = 390;
     }
     if (which ==2) {
@@ -18,7 +18,7 @@ class Person {
       y = 410;
     }
     if (which==3) {
-      img = loadImage("elsa.png");
+      img = loadImage("elsa.PNG");
       y = 425;
     }
 
