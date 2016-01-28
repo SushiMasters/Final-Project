@@ -46,18 +46,14 @@ void draw() {
     fill(300, 300, 300);
     text(countDown + " more rolls...", 25, height -50);
 
-    //mouth.set(x+181, y+419);
-    //mouth.set(x+90, y-100);
-    println(elsa.mouth);
-
-    elsa.display();
-    elsa.move();
+    shiv.display();
+    shiv.move();
     ethan.display();
     ethan.move();
     emily.display();
     emily.move();
-    shiv.display();
-    shiv.move();
+    elsa.display();
+    elsa.move();
 
     for (int i = 0; i < sushi.size(); i++) {
       Sushi s = sushi.get(i);
