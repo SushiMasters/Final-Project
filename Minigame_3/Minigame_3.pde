@@ -1,15 +1,13 @@
 PImage restaurant, cannon;
-float mode, theta, timer, x, y;
+float mode, theta, timer;
 ArrayList<Sushi> sushi = new ArrayList <Sushi>();
 Person emily, ethan, elsa, shiv;
-PVector mouth;
 int countDown;
 
 void setup() {
   size(1280, 720, P3D);
   restaurant = loadImage("restaurant.jpg");
   cannon = loadImage("cannon.png");
-  mouth = new PVector();
 
   mode = 0;
   countDown = 10;
@@ -17,10 +15,10 @@ void setup() {
   cannon.resize(250, 97); 
   restaurant.resize(1280, 720);
 
-  shiv = new Person(x, y, 0);
-  ethan = new Person(x, y, 1);
-  emily = new Person(x, y, 2);
-  elsa = new Person(x, y, 3);
+  shiv = new Person(0);
+  ethan = new Person(1);
+  emily = new Person(2);
+  elsa = new Person(3);
 }
 
 void draw() {
@@ -49,8 +47,8 @@ void draw() {
     text(countDown + " more rolls...", 25, height -50);
 
     //mouth.set(x+181, y+419);
-    mouth.set(x+90, y-100);
-    println(x+","+y);
+    //mouth.set(x+90, y-100);
+    println(elsa.mouth);
 
     elsa.display();
     elsa.move();
@@ -65,7 +63,7 @@ void draw() {
       Sushi s = sushi.get(i);
       s.display();
       s.shoot();
-      if (s.touches(mouth)) {
+      if (s.touches(elsa.mouth)||s.touches(ethan.mouth)||s.touches(emily.mouth)||s.touches(shiv.mouth)) {
         countDown -=1;
         s.getsEaten();
       }
