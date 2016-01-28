@@ -21,4 +21,10 @@ class Trash {
       loc.y = random(height/4, height*3/4);
     }
   }
+  
+  boolean contact() {
+    if(f.hookstatus == 1 && bx > loc.x && bx < loc.x+100 && mouseY > loc.y && mouseY < loc.y+100) {
+      return true;
+    } else return false;
+  }
 }

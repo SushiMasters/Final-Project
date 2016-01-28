@@ -1,5 +1,5 @@
-float bx, by, mode;
-int score;
+float bx, by, mode, count;
+int score, timer;
 PImage bucket, boat, worm, bottle, can;
 Fish f;
 Shark s;
@@ -7,6 +7,7 @@ Trash b, c;
 
 void setup() {
   size(1280, 720);
+  frameRate(30);
   
   f = new Fish();
   s = new Shark();
@@ -23,6 +24,8 @@ void setup() {
   by = 0;
   mode = 0;
   score = 0;
+  count = 0;
+  timer = 0;
 }
 
 void draw() {
@@ -84,6 +87,21 @@ void draw() {
     //Trash
     b.drift(bottle);
     c.drift(can);
+    
+    if(s.contact()) {
+      f.reset();
+      timer += 5;
+      fill(255, 0, 0);
+    }
+    
+    count += 1;
+    if(count == 30) {
+      timer += 1;
+      count = 0;
+    }
+    text(timer, width - 100, 100);
+    
+    fill(255);
   }
 }
 
