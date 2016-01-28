@@ -26,7 +26,6 @@ class Sushi {
 
   boolean touches(PVector mouth) {
     if (loc.dist(mouth) <=30) {
-      println("caught at " + loc.x + "," + loc.y);
       return true;
     } else {
       return false;
