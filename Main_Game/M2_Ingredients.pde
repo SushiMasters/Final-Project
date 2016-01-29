@@ -12,7 +12,7 @@ class Mat extends Ingredients {
     image(mat, 0, 0);
   }
   void check() {
-    if (mode == 5 && dist(mouseX, mouseY, width/2, height/2) <= 500) {
+    if (mode == 6 && dist(mouseX, mouseY, width/2, height/2) <= 500) {
       ma = true;
     }
   }
@@ -40,7 +40,7 @@ class Nori extends Ingredients {
     }
   }
   void check() {
-    if (mode == 5 && dist(mouseX, mouseY, 180, 365) <= 75) {
+    if (mode == 6 && dist(mouseX, mouseY, 180, 365) <= 75) {
       no = true;
     }
   }
@@ -67,7 +67,7 @@ class Rice extends Ingredients {
     }
   }
   void check() {
-    if (mode == 5 && dist(mouseX, mouseY, 180, 180) <= 75) {
+    if (mode == 6 && dist(mouseX, mouseY, 180, 180) <= 75) {
       ri = true;
     }
   }
@@ -81,7 +81,7 @@ class Salmon extends Ingredients {
     image(salmon, width-200-80, 50+165+40);
     textSize(20);
     fill(0);
-    text("FISH", width-180, 365);
+    text("SALMON", width-180, 365);
   }
   void fPlace() {
     if (fi == true) {
@@ -90,11 +90,11 @@ class Salmon extends Ingredients {
       rect(width/2, height/2-50, 500, 300);
       textSize(20);
       fill(255, 0, 0);
-      text("FISH", width-180, 365);
+      text("SALMON", width-180, 365);
     }
   }
   void check() {
-    if (mode == 5 && dist(mouseX, mouseY, width-180, 365) <= 75) {
+    if (mode == 6 && dist(mouseX, mouseY, width-180, 365) <= 75) {
       fi = true;
     }
   }
@@ -121,7 +121,7 @@ class Avocado extends Ingredients {
     }
   }
   void check() {
-    if (mode == 5 && dist(mouseX, mouseY, width-180, 620) <= 75) {
+    if (mode == 6 && dist(mouseX, mouseY, width-180, 620) <= 75) {
       av = true;
     }
   }
@@ -148,7 +148,7 @@ class Sauce extends Ingredients {
     }
   }
   void check() {
-    if (mode == 5 && dist(mouseX, mouseY, 180, 600) <= 75) {
+    if (mode == 6 && dist(mouseX, mouseY, 180, 600) <= 75) {
       sa = true;
     }
   }
@@ -175,7 +175,7 @@ class Wasabi extends Ingredients {
     }
   }
   void check() {
-    if (mode == 5 && dist(mouseX, mouseY, width-180, 170) <= 75) {
+    if (mode == 6 && dist(mouseX, mouseY, width-180, 170) <= 75) {
       wa = true;
     }
   }

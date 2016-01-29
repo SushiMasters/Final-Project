@@ -15,7 +15,7 @@ class Screen {
     fill(255);
     textSize(20);
     String des = "Catch 10 fish! Watch out for garbage and sharks.";
-    text(des, 250, height/2, 800, height);
+    text(des, 250, height/2+50, 800, height);
   }
 
   void End1() {
@@ -26,14 +26,14 @@ class Screen {
     text("[ M I N I G A M E  1 ]", width/2, height/2-250);
     textSize(75);
     fill(0, 255, 0);
-    text("COMPLETE", width/2, height/2-125);
+    text("C O M P L E T E", width/2, height/2-125);
     fill(150);
     textSize(50);
     text("click to continue...", width/2, height/2+200);
     fill(255);
     textSize(20);
     String des = "Great job! You caught the fish for the sushi!";
-    text(des, 250, height/2, 800, height);
+    text(des, 250, height/2 + 50, 800, height);
   }
 
   void Title2() {
