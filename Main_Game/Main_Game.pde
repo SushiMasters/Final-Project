@@ -33,7 +33,7 @@ int countDown;  //name variables
 
 void setup() {
   title = loadImage("title.jpg");
- 
+
   size(1280, 720);
   frameRate(30);
 
@@ -89,7 +89,7 @@ void setup() {
   cannon = loadImage("cannon.png");  
 
   //initialize variables
-  countDown = 10;
+  countDown = 20;
 
   cannon.resize(250, 97);   //resize images
   restaurant.resize(1280, 720);
@@ -102,10 +102,10 @@ void setup() {
 
 void draw() {
   //Opening screen
-  if(mode == 0) {
+  if (mode == 0) {
     image(title, 0, 0);
   }
-  
+
   //Title screen for M1-------------------------------------------------------------------------------------------------------------
   if (mode == 1) {
     oneTitle = new Screen();
@@ -114,6 +114,7 @@ void draw() {
 
   if (mode == 2) {
     //Water and sky
+    rectMode(LEFT);
     noStroke();
     fill(105, 250, 255);
     rect(0, 0, width, height);
@@ -131,7 +132,7 @@ void draw() {
     image(helpicon, width - 50, 25);
     //If help icon is clicked
     if (mousePressed && mouseX > width - 50 && mouseX < width - 20 && mouseY > 25 && mouseY < 55) {
-     mode = 3;
+      mode = 3;
     }
 
     //Boat
@@ -181,7 +182,7 @@ void draw() {
     fill(255);
 
     //End game
-    if (score ==1) {
+    if (score == 5) {
       mode = 4;
     }
   }
@@ -240,7 +241,7 @@ void draw() {
         }
       }
 
-      //Countdown
+      //Timer
       count +=1;
       if (count == 30) {
         timer +=1;
@@ -270,7 +271,7 @@ void draw() {
       text(num + order, width/2, 23);
 
       //Complete task?
-      if (number > 10) {
+      if (number > 5) {
         mode = 7;
       }
     }
@@ -289,10 +290,22 @@ void draw() {
   } else if (mode ==9) {
 
     image(restaurant, 0, 0);  //make background and show sushi you need to win
-    textAlign(LEFT);
     textSize(30);
     fill(300, 300, 300);
+    textAlign(LEFT);
     text(countDown + " more rolls...", 25, height -50);
+    
+    //Timer
+    count +=1;
+    if (count == 30) {
+      timer +=1;
+      count = 0;
+    }
+    image(hourglass, width - 330, 10);
+    textSize(100);
+    textAlign(LEFT);
+    text(timer, width - 250, 100);
+    fill(255);
 
     shiv.display();  //show people and make them move
     shiv.move();
@@ -321,7 +334,7 @@ void draw() {
     image(cannon, -40, -100);
     popMatrix();
 
-    if (countDown ==0) {  //when you shoot enough sushi into mouths, then the game ends
+    if (countDown == 0) {  //when you shoot enough sushi into mouths, then the game ends
       mode = 10;
     }
   }
@@ -340,17 +353,17 @@ void draw() {
 
 void mouseClicked() {
   //Minigame screens-------------------------------------------------------------------------------------------------------------
-  if (mode == 0) { //Opening screen
+  if (mode == 0 && mouseX > 10 && mouseX < 280 && mouseY > 550 && mouseY < 720) { //Opening screen
     mode = 1; //M1 Title
   } else if (mode == 1) { //M1 Title
     mode = 2;  //M1
   } else if (mode == 4) { //M1 End
-    mode = 5;  
+    mode = 5;
   } else if (mode == 5) { //M2 Title
     mode = 6; //M2
     newOrder();
   } else if (mode == 7) { //M2 End
-    mode = 8; 
+    mode = 8;
   } else if (mode == 8) { //M3 Title
     mode = 9; //M3
     counter = frameCount;
@@ -358,8 +371,13 @@ void mouseClicked() {
     mode = 11; //End screen
   } else if (mode == 11) {
     mode = 0; //Restart to M1 Title
+    timer = 0;
+    count = 0;
+    score = 0;
+    number = 0;
+    countDown = 20;
   }
-  
+
   //M2-------------------------------------------------------------------------------------------------------------
   //New order by pressing "Send to Waiter" button
   if (mouseButton == LEFT && dist(mouseX, mouseY, width/2-125, 670)<=60 && mode == 6) {
